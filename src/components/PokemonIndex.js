@@ -28,6 +28,15 @@ class PokemonPage extends React.Component {
     })
   }
 
+  newPokemonArr = (newPokemon) => {
+    let {pokemons} = this.state
+    let newArr = [newPokemon, ...pokemons]
+    console.log(newArr)
+    this.setState({
+      pokemons: newArr
+    })
+  }
+
   showPokemons = () => {
     let {search, pokemons} = this.state
     let showPokemon = pokemons.filter((pokemonObj) => {
@@ -36,12 +45,13 @@ class PokemonPage extends React.Component {
     return showPokemon
   }
 
+
   render() {
     return (
       <Container>
         <h1>Pokemon Searcher</h1>
         <br />
-        <PokemonForm />
+        <PokemonForm addNewPokemon={this.newPokemonArr}/>
         <br />
         <Search onChange={this.handleSearch} />
         <br />

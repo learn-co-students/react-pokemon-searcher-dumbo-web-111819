@@ -7,7 +7,8 @@ import { Container } from 'semantic-ui-react'
 class PokemonPage extends React.Component {
 
   state = {
-    pokemons: []
+    pokemons: [],
+    search: ""
   }
 
   componentDidMount(){
@@ -20,6 +21,21 @@ class PokemonPage extends React.Component {
     })
   }
 
+  handleSearch = (evt) => {
+    let {value} = evt.target
+    this.setState({
+      search: value
+    })
+  }
+
+  showPokemons = () => {
+    let {search, pokemons} = this.state
+    let showPokemon = pokemons.filter((pokemonObj) => {
+      return pokemonObj.name.toLowerCase().includes(search.toLowerCase())
+    })
+    return showPokemon
+  }
+
   render() {
     return (
       <Container>
@@ -27,9 +43,9 @@ class PokemonPage extends React.Component {
         <br />
         <PokemonForm />
         <br />
-        <Search onChange={() => console.log('🤔')} />
+        <Search onChange={this.handleSearch} />
         <br />
-        <PokemonCollection pokemonData={this.state.pokemons}/>
+        <PokemonCollection pokemonData={this.showPokemons()}/>
       </Container>
     )
   }

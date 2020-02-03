@@ -8,7 +8,7 @@ class PokemonCollection extends React.Component {
   render() {
     // console.log(this.props.pokemonData)
     let pokemonCards = this.props.pokemonData.map((pokemonObj) => {
-      return <PokemonCard key={pokemonObj.id} pokemonData={pokemonObj}/>
+      return <PokemonCard key={pokemonObj.id} deletePokemon={this.props.deletePokemon} pokemonData={pokemonObj}/>
     })
     return (
       <Card.Group itemsPerRow={6}>

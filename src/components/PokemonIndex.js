@@ -31,9 +31,28 @@ class PokemonPage extends React.Component {
   newPokemonArr = (newPokemon) => {
     let {pokemons} = this.state
     let newArr = [newPokemon, ...pokemons]
-    console.log(newArr)
+    // console.log(newArr)
     this.setState({
       pokemons: newArr
+    })
+  }
+
+  handleDelete = (pokemonId) => {
+    // console.log(pokemonId)
+    fetch(`http://localhost:3000/pokemon/${pokemonId}`, {
+      method: 'DELETE'
+    })
+    .then(resp => resp.json())
+    .then(emptyObj => {
+      if (emptyObj){
+        let filteredPokemon = this.state.pokemons.filter((pokemonObj) => {
+          return pokemonObj.id !== pokemonId
+        })
+        // console.log("I'm being deleted", pokemonId)
+        this.setState({
+          pokemons: filteredPokemon
+        }) 
+      }
     })
   }
 
@@ -45,7 +64,6 @@ class PokemonPage extends React.Component {
     return showPokemon
   }
 
-
   render() {
     return (
       <Container>
@@ -55,7 +73,7 @@ class PokemonPage extends React.Component {
         <br />
         <Search onChange={this.handleSearch} />
         <br />
-        <PokemonCollection pokemonData={this.showPokemons()}/>
+        <PokemonCollection pokemonData={this.showPokemons()} deletePokemon={this.handleDelete}/>
       </Container>
     )
   }

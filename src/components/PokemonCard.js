@@ -19,7 +19,11 @@ class PokemonCard extends React.Component {
         image: sprites.front
       })
     }
+  }
 
+  handleDelete = () => {
+    let pokemonId = this.props.pokemonData.id
+    this.props.deletePokemon(pokemonId)
   }
 
   render() {
@@ -29,6 +33,7 @@ class PokemonCard extends React.Component {
     return (
       <Card>
         <div onClick={this.handleToggle}>
+          <button id="delete" onClick={this.handleDelete}>x</button>
           <div className="image">
             <img alt="oh no!" src={this.state.image}/>
           </div>

@@ -29,14 +29,12 @@ class PokemonPage extends React.Component {
       })
     }
 
-    getPokemonInfo = (pokemonObj) => {
-        let newPokemonObj = {...pokemonObj, stats: {name:'hi', hp:'1000'}}
-        let newPokemonArray = [...this.state.pokemons,newPokemonObj ]
-
+    handleSubmissionOfForm = (pokemonObj) => {
+        let newPokemonArray = [...this.state.pokemons, pokemonObj]
         this.setState({
           pokemons: newPokemonArray
         })
-
+        return newPokemonArray
     }
 
     filteredPokemon = () => {
@@ -47,13 +45,12 @@ class PokemonPage extends React.Component {
     }
 
   render() {
-    console.log(this.state.pokemons)
     // console.log(this.state.pokemons)
     return (
       <Container>
         <h1>Pokemon Searcher</h1>
         <br />
-        <PokemonForm helloFromTheBottom = {this.getPokemonInfo}/>
+        <PokemonForm addNewPokemon = {this.handleSubmissionOfForm}/>
         <br />
         <Search searchValue={this.state.searchValue} onChange={this.handleSearch} />
         <br />

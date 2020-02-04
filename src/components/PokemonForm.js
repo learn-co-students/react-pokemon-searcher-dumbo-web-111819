@@ -15,12 +15,33 @@ class PokemonForm extends React.Component {
 
   handleSubmit = (evt) => {
       evt.preventDefault()
-      this.props.helloFromTheBottom(this.state)
-  }
+      let {name, hp, frontUrl, backUrl} = this.state
+      fetch(`http://localhost:3000/pokemon`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          stats: [{
+          value: hp,
+          name: "hp"
+       }],
+       sprites: {
+         front: frontUrl,
+         back: backUrl
+          }
+        })
+      })
+      .then(r => r.json())
+      .then(newPokemonObj => {
+        this.props.addNewPokemon(newPokemonObj)
+      })
+    }
+
   handleAllChange = (evt) => {
       // console.log(evt)
       let {name, value } = evt.target
-
       this.setState({
         [name]: value
       })

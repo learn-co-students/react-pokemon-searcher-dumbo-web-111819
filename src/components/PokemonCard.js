@@ -8,16 +8,14 @@ class PokemonCard extends React.Component {
   }
 
   handleClick = () => {
-    // console.log('u clicked me');
     this.setState(prevState => ({
       flipped: !prevState.flipped
     }))
   }
   
   render() {
-    // console.log(this.props.pokemon);
     let {name, stats, sprites } = this.props.pokemon
-    let hp = stats[4].value
+    let hp = stats.find(stat => stat.name === "hp")
     let {front, back} = sprites
     return (
       <Card>
@@ -31,7 +29,7 @@ class PokemonCard extends React.Component {
           <div className="extra content">
             <span>
               <i className="icon heartbeat red" />
-              {hp}
+              {hp.value}
             </span>
           </div>
         </div>

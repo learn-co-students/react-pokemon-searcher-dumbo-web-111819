@@ -4,21 +4,21 @@ import { Card } from 'semantic-ui-react'
 
 class PokemonCollection extends React.Component {
 
-  state={
-    pokemons: []
-  }
+  // state={
+  //   pokemons: []
+  // }
 
-  componentDidMount(){
-    fetch('http://localhost:3000/pokemon')
-    .then(r => r.json())
-    .then(pokemons => this.setState({
-      pokemons
-    }))
-  }
+  // componentDidMount(){
+  //   fetch('http://localhost:3000/pokemon')
+  //   .then(r => r.json())
+  //   .then(pokemons => this.setState({
+  //     pokemons
+  //   }))
+  // }
 
   renderAllPokemons = () => {
     // this.props.filterCollection(this.state.pokemons)
-    return this.props.filterCollection(this.state.pokemons).map(pokemon => <PokemonCard key={pokemon.id} pokemon={pokemon} />)
+    return this.props.filterCollection(this.props.pokemons).map(pokemon => <PokemonCard key={pokemon.id} pokemon={pokemon} />)
   }
 
   render() {

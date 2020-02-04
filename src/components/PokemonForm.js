@@ -21,8 +21,16 @@ class PokemonForm extends React.Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    event.preventDefault()
     this.props.createNewPokemon(this.state)
+
+    this.setState({
+      name: '',
+      hp: '',
+      frontUrl: '',
+      backUrl: ''
+    })
   }
 
   render() {

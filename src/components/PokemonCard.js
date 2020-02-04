@@ -7,10 +7,29 @@ class PokemonCard extends React.Component {
     src: true
   }
 
+  // showBackPicture = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //   src: !prevState.src
+  //     }
+  //   })
+  // }
+
+  // showBackPicture = () => {
+  //   this.setState({
+  //     src: !this.state.src
+  //   })
+  // }
+
   showBackPicture = () => {
+    let srcTrue = !this.state.src
     this.setState({
-      src: !this.state.src
+      src: srcTrue
     })
+  }
+
+  handleDelete = () => {
+    this.props.deletePokemon(this.props.pokemon.id)
   }
 
   render() {
@@ -18,9 +37,9 @@ class PokemonCard extends React.Component {
     // console.log(this.props.pokemon)
     return (
       <Card>
-        <div onClick={this.showBackPicture} >
+        <div>
           <div className="image">
-            <img src={this.state.src ? this.props.pokemon.sprites.front : this.props.pokemon.sprites.back} alt="oh no!" />
+            <img onClick={this.showBackPicture} src={this.state.src ? this.props.pokemon.sprites.front : this.props.pokemon.sprites.back} alt="oh no!" />
           </div>
           <div className="content">
             <div className="header">{this.props.pokemon.name}</div>
@@ -31,6 +50,7 @@ class PokemonCard extends React.Component {
               {this.props.pokemon.stats.find(stats => stats.name === "hp").value}
             </span>
           </div>
+          <button onClick={this.handleDelete}>X</button>
         </div>
       </Card>
     )

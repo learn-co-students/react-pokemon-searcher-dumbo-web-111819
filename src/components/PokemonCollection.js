@@ -14,6 +14,7 @@ class PokemonCollection extends React.Component {
         return <PokemonCard 
           key={pokemon.id}
           pokemon={pokemon}
+          deletePokemon={this.props.deletePokemon}
           />
         })}
       </Card.Group>

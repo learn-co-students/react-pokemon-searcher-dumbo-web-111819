@@ -9,7 +9,7 @@ class PokemonForm extends React.Component {
       name: '',
       hp: '',
       frontUrl: '',
-      backUrl: ''
+      backUrl: '',
     }
   }
 
@@ -26,6 +26,10 @@ class PokemonForm extends React.Component {
     this.props.createPokemon(this.state)
   }
 
+  handleCheck = (e) => {
+    this.props.filterChecked(e)
+  }
+  
   
   render() {
 
@@ -40,6 +44,8 @@ class PokemonForm extends React.Component {
             <Form.Input fluid label="Front Image URL" placeholder="url" name="frontUrl" value={this.state.fronUrl} onChange={this.handleChange}/>
             <Form.Input fluid label="Back Image URL" placeholder="url" name="backUrl" value={this.state.backUrl} onChange={this.handleChange}/>
           </Form.Group>
+            Health > 80
+          <Form.Checkbox  value="" onClick={this.handleCheck}></Form.Checkbox>
           <Form.Button>Submit</Form.Button>
         </Form>
       </div>

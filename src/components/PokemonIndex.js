@@ -8,7 +8,9 @@ class PokemonPage extends React.Component {
 
   state ={
     pokemon: [],
-    searchTerm:""
+    searchTerm:"",
+    isChecked: false
+
   }
 
 
@@ -54,20 +56,41 @@ class PokemonPage extends React.Component {
       return this.state.pokemon.filter( poke => poke.name.includes(this.state.searchTerm))
    }
 
-  render() {
+   filterCheck = (e) => {
+    // console.log(e)
+    let notChecked = !this.state.isChecked
+    this.setState({
+      isChecked: notChecked
+    })
+   }
 
+   filterPokemon = () =>{
+     
+     
+     let val = this.state.pokemon.filter(poke => {
+      let {stats} = poke
+       // console.log(stat)
+       let stat = stats.find(obj => obj.name === 'hp')
+      if (stat.value > 80) return poke
+          else
+        return;
+      })
+      return val;
+   }
+
+  render() {
 
 
     return (
       <Container>
         <h1>Pokemon Searcher</h1>
         <br />
-        <PokemonForm pokemon={this.state.pokemon} createPokemon={this.createPokemon}/>
+        <PokemonForm filterChecked={this.filterCheck} pokemon={this.state.pokemon} createPokemon={this.createPokemon}/>
         <br />
         <Search searchTerm={this.state.searchTerm} search={this.search}  />  
         {/* onChange={() => console.log('🤔')} */}
         <br />
-        <PokemonCollection pokemon={this.searchPool()} />
+        <PokemonCollection pokemon={this.state.isChecked ? this.filterPokemon() : this.searchPool()} />
       </Container>
     )
   }
